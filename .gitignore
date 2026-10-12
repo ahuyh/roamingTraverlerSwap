@@ -1,0 +1,16 @@
+node_modules/
+dist/
+build/
+.next/
+out/
+.env
+.env.local
+.DS_Store
+*.log
+coverage/
+artifacts/
+cache/
+.vscode/
+.idea/
+.cursor/
+.cursor/
