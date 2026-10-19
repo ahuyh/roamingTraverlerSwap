@@ -14,9 +14,9 @@ contract Factory {
 
     /// 创建交易池，若已存在则revert
     function createPair(address tokenA, address tokenB) external returns (address pair) {
-        require(tokenA != tokenB, "代币不能相同");
-        require(tokenA != address(0) && tokenB != address(0), "不能为空");
-        require(getPair[tokenA][tokenB] == address(0), "该代币对已存在");
+        require(tokenA != tokenB, "IDENTICAL_TOKENS");
+        require(tokenA != address(0) && tokenB != address(0), "ZERO_ADDRESS");
+        require(getPair[tokenA][tokenB] == address(0), "PAIR_EXISTS");
         Pair p = new Pair();
         p.initialize(tokenA, tokenB);
         pair = address(p);

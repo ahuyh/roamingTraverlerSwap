@@ -16,7 +16,7 @@ contract Router {
     }
 
     function getAmountOut(uint256 amountIn, uint256 reserveIn, uint256 reserveOut) public pure returns (uint256) {
-        require(amountIn > 0 && reserveIn > 0 && reserveOut > 0, "输入有误");
+        require(amountIn > 0 && reserveIn > 0 && reserveOut > 0, "INVALID_INPUT");
         uint256 inWithFee = amountIn * 997;
         return (reserveOut * inWithFee) / (reserveIn * 1000 + inWithFee);
     }

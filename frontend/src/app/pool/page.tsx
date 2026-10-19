@@ -58,7 +58,7 @@ export default function PoolPage() {
     <Card title="添加流动性" style={{ marginTop: 16 }}>
       <Input value={qa} onChange={(e) => setQa(e.target.value)} placeholder="数量A" style={{ marginBottom: 8 }} />
       <Input value={qb} onChange={(e) => setQb(e.target.value)} placeholder="数量B" style={{ marginBottom: 8 }} />
-      <Button type="primary" onClick={add} block>Approve + AddLiquidity</Button>
+      <Button type="primary" onClick={add} block>AddLiquidity</Button>
     </Card>
   </>);
 }

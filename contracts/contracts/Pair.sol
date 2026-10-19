@@ -22,7 +22,7 @@ contract Pair is ERC20 {
 
     /// Factory部署后调用一次，初始化代币对
     function initialize(address _tokenA, address _tokenB) external {
-        require(token0 == address(0), "已初始化过"); 
+        require(token0 == address(0), "ALREADY_INITIALIZED"); 
         (token0, token1) = _tokenA < _tokenB ? (_tokenA, _tokenB) : (_tokenB, _tokenA); 
     }
 
@@ -60,7 +60,7 @@ contract Pair is ERC20 {
             if (l2 < liquidity) liquidity = l2;
         }
         // 触发了liquidity不符合条件直接revert,白花gas
-        require(liquidity > 0, "不符合条件");
+        require(liquidity > 0, "INSUFFICIENT_LIQUIDITY_MINTED");
         _mint(to, liquidity);
         _update(bal0, bal1);
         emit Mint(msg.sender, amount0, amount1);
@@ -76,7 +76,7 @@ contract Pair is ERC20 {
         uint256 _total = totalSupply();
         amount0 = (liq * bal0) / _total;
         amount1 = (liq * bal1) / _total;
-        require(amount0 > 0 && amount1 > 0, "代币数量不符合条件");
+        require(amount0 > 0 && amount1 > 0, "INSUFFICIENT_LIQUIDITY_BURNED");
         _burn(address(this), liq);
         IERC20(token0).transfer(to, amount0);
         IERC20(token1).transfer(to, amount1);
@@ -88,8 +88,8 @@ contract Pair is ERC20 {
      * 调用前需把tokenIn转入本合约
      */
     function swap(address tokenIn, uint256 amountOut, address to) external {
-        require(tokenIn == token0 || tokenIn == token1, "无效代币");
-        require(amountOut > 0, "输出代币不足");
+        require(tokenIn == token0 || tokenIn == token1, "INVALID_TOKEN");
+        require(amountOut > 0, "INSUFFICIENT_OUTPUT_AMOUNT");
         (uint112 r0, uint112 r1) = (reserve0, reserve1);
         if (tokenIn == token0) {
             IERC20(token1).transfer(to, amountOut);

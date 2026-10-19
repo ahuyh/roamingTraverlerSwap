@@ -35,7 +35,7 @@ export default function PositionsPage() {
       <p>池地址：{(pair as string) ?? "-"}</p>
       <p>我的 LP：{bal ? formatEther(bal as bigint) : "0"}</p>
       <Input value={liq} onChange={(e) => setLiq(e.target.value)} placeholder="移除 LP 数量" style={{ marginBottom: 8 }} />
-      <Button danger block onClick={remove} disabled={!address}>Approve LP + Remove</Button>
+      <Button danger block onClick={remove} disabled={!address}>Remove</Button>
     </Card>
   );
 }
